@@ -61,32 +61,36 @@ def Selection():
 		usrInpt = int(input('Product:'))
 		wghtInpt = int(input('Weight:'))
 	
-		for bev in Beverage.keys():
-			if bev != usrInpt:
-                continue
+		for bev in Beverage:
+            choice = bev
 
-				prodNme = Beverage[usrInpt]
-				order = Order(prodNme,wghtInpt)
-								
-				sql = "INSERT INTO customers (product, weight, cost) VALUES (%s, %s, %s)"
-				val = (order.prod, order.weight, order.cost)
-				mycursor.execute(sql, val)
-								
-				mydb.commit()
-								
-				print(mycursor.rowcount, "record inserted.")
+            if choice == usrInpt:
 
-		elif:
+		        prodNme = Beverage[usrInpt]
+                order = Order()
+                cost_mthd = order.Cost()
+
+		        cust_order = Order(prodNme,wghtInpt,cost_mthd)
+								
+		        sql = "INSERT INTO customers (product, weight, cost) VALUES (%s, %s, %s)"
+		        val = (order.prod, order.weight, order.cost)
+		        mycursor.execute(sql, val)
+								
+		        mydb.commit()
+								
+		        print(mycursor.rowcount, "record inserted.")
+
+		    elif:
 			
-			mycursor.execute("SELECT * FROM customers")
+		        mycursor.execute("SELECT * FROM customers")
 								
-			myresult = mycursor.fetchall()
+		        myresult = mycursor.fetchall()
 								
-			for x in myresult:
-				print(x)
-				break
+			    for x in myresult:
+				    print(x)
+				    break
 
-        else:
+            
 
 
 ```
@@ -94,7 +98,7 @@ def Selection():
 Finally, I’ve decided to store the records in a MySQL database because I’ve found it challenging to use a dictionary or any other data structure. I another option that I would use a text file but a database works better in this case.
 
 <aside>
-💡 **Lesson:**
+## **Lesson:**
 One thing I’ve learned is the use of the Django framework could have made it easier for me to integrate all the intended modules and tools.
 
 </aside>
