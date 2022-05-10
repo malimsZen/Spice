@@ -1,0 +1,37 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"sqltools.connections": [
+			{
+				"mysqlOptions": {
+					"authProtocol": "default"
+				},
+				"previewLimit": 50,
+				"server": "localhost",
+				"port": 3306,
+				"askForPassword": true,
+				"driver": "MySQL",
+				"name": "Zen",
+				"database": "Zen",
+				"username": "root"
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+		
+		
+			{
+				"type": "pwa-msedge",
+				"request": "launch",
+				"name": "Open style.html",
+				"file": "c:\\Users\\rapha\\OneDrive\\Desktop\\C0d3$\\Web\\style.html"
+			}
+		]
+	}
+}
