@@ -8,7 +8,7 @@ Small shopping platform that takes customer orders and saves them into a databas
 First, I’ll create a class that will capture the order-objects attributes. When shopping in a supermarket, customers pick products of certain brands and then decide on the product weight they intend to purchase. That means that an order(object) has attributes like product, weight, and cost. One unique feature about products though is that they have fixed, attributes. 
 
 
-💡 ## Order:
+## Order:
 1. Product
 2. Weight
 3. Cost
@@ -85,7 +85,7 @@ def Selection():
 			for x in myresult:
 				print(x)
 				break
-            
+
         else:
 
 
