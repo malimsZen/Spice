@@ -19,11 +19,11 @@ I’ll start out by creating an order object:
 
 ```python
 def Order():
-		class Order:
-				def __init__(self,prod,weight): # order object gets to have this attributes.
-						self.prod = prod
-						self.weight = weight
-						self.cost = self.weight * 10
+	class Order:
+		def __init__(self,prod,weight): # order object gets to have this attributes.
+			self.prod = prod
+			self.weight = weight
+			self.cost = self.weight * 10
 
 					
 			
@@ -39,50 +39,51 @@ import mysql.connector
 
 def Selection():
 
-		mydb = mysql.connector.connect(
-	  host="localhost",
-	  user="yourusername",
-	  password="yourpassword",
-	  database="mydatabase"
+	mydb = mysql.connector.connect(
+	host="localhost",
+	user="yourusername",
+	password="yourpassword",
+	database="mydatabase"
 			)# creating a connection between the python program and the SQL database.
 
-		mycursor = mydb.cursor()
-		mycursor.execute("CREATE TABLE customers (id INT AUTO_INCREMENT PRIMARY KEY, product VARCHAR(255), weight INT, cost INT)")
+	mycursor = mydb.cursor()
+	mycursor.execute("CREATE TABLE customers (id INT AUTO_INCREMENT PRIMARY KEY, product VARCHAR(255), weight INT, cost INT)")
 
-		Beverage = {1:'Tea Masala',2:'Ginger',3:'Tea Leaves',4:'Sugar'} # catalog in dictionary data structure.
-		pprint.pprint(Beverage)
+	Beverage = {1:'Tea Masala',2:'Ginger',3:'Tea Leaves',4:'Sugar'} # catalog in dictionary data structure.
+	pprint.pprint(Beverage)
 
-		print('Select product to start shopping.')
+	print('Select product to start shopping.')
 		
 
 		# I'll need to create a loop cycle that will keep on iterating as long as the conditions are met. 
 
-		while True:
-				usrInpt = int(input('Product:'))
-				wghtInpt = int(input('Weight:'))
+	while True:
+		usrInpt = int(input('Product:'))
+		wghtInpt = int(input('Weight:'))
 	
-				for bev in Beverage.keys():
-						if bev == usrInpt:
-								prodNme = Beverage[usrInpt]
-								order = Order(prodNme,wghtInpt)
+		for bev in Beverage.keys():
+			if bev == usrInpt:
+				prodNme = Beverage[usrInpt]
+				order = Order(prodNme,wghtInpt)
 								
-								sql = "INSERT INTO customers (product, weight, cost) VALUES (%s, %s, %s)"
-								val = (order.prod, order.weight, order.cost)
-								mycursor.execute(sql, val)
+				sql = "INSERT INTO customers (product, weight, cost) VALUES (%s, %s, %s)"
+				val = (order.prod, order.weight, order.cost)
+				mycursor.execute(sql, val)
 								
-								mydb.commit()
+				mydb.commit()
 								
-								print(mycursor.rowcount, "record inserted.")
-					else:
-								mycursor = mydb.cursor()
+				print(mycursor.rowcount, "record inserted.")
 
-								mycursor.execute("SELECT * FROM customers")
+		else:
+			mycursor = mydb.cursor()
+
+			mycursor.execute("SELECT * FROM customers")
 								
-								myresult = mycursor.fetchall()
+			myresult = mycursor.fetchall()
 								
-								for x in myresult:
-								  print(x)
-									break
+			for x in myresult:
+				print(x)
+				break
 
 ```
 
