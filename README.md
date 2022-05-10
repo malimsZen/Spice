@@ -7,15 +7,15 @@ Small shopping platform that takes customer orders and saves them into a databas
 
 First, I’ll create a class that will capture the order-objects attributes. When shopping in a supermarket, customers pick products of certain brands and then decide on the product weight they intend to purchase. That means that an order(object) has attributes like product, weight, and cost. One unique feature about products though is that they have fixed, attributes. 
 
-<aside>
-💡 Order:
+
+💡 ## Order:
 1. Product
 2. Weight
 3. Cost
 
-</aside>
 
-I’ll start out by creating an order object: 
+
+I’ll start out by creating an order function then class which define the object's characteristics: 
 
 ```python
 def Order():
@@ -43,11 +43,11 @@ def Selection():
 	host="localhost",
 	user="yourusername",
 	password="yourpassword",
-	database="mydatabase"
+	database="Orderdb"
 			)# creating a connection between the python program and the SQL database.
 
 	mycursor = mydb.cursor()
-	mycursor.execute("CREATE TABLE customers (id INT AUTO_INCREMENT PRIMARY KEY, product VARCHAR(255), weight INT, cost INT)")
+	mycursor.execute("CREATE TABLE orderTable (id INT AUTO_INCREMENT PRIMARY KEY, product VARCHAR(255), weight INT, cost INT)")
 
 	Beverage = {1:'Tea Masala',2:'Ginger',3:'Tea Leaves',4:'Sugar'} # catalog in dictionary data structure.
 	pprint.pprint(Beverage)
@@ -62,7 +62,9 @@ def Selection():
 		wghtInpt = int(input('Weight:'))
 	
 		for bev in Beverage.keys():
-			if bev == usrInpt:
+			if bev != usrInpt:
+                continue
+
 				prodNme = Beverage[usrInpt]
 				order = Order(prodNme,wghtInpt)
 								
@@ -74,9 +76,8 @@ def Selection():
 								
 				print(mycursor.rowcount, "record inserted.")
 
-		else:
-			mycursor = mydb.cursor()
-
+		elif:
+			
 			mycursor.execute("SELECT * FROM customers")
 								
 			myresult = mycursor.fetchall()
@@ -84,6 +85,9 @@ def Selection():
 			for x in myresult:
 				print(x)
 				break
+            
+        else:
+
 
 ```
 

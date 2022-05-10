@@ -19,6 +19,7 @@ def bevOrder(): # Beverage order function.
         host="localhost",
         user="root",
         password="P@$$w0rd"
+        database="Orderdb"
                 )# creating a connection string between the python program and the SQL database.
     
     mycursor = mydb.cursor()
