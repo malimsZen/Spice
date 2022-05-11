@@ -46,7 +46,6 @@ def Selection():
 	database="Orderdb"
 			)# creating a connection between the python program and the SQL database.
 
-	mycursor = mydb.cursor()
 	mycursor.execute("CREATE TABLE orderTable (id INT AUTO_INCREMENT PRIMARY KEY, product VARCHAR(255), weight INT, cost INT)")
 
 	Beverage = {1:'Tea Masala',2:'Ginger',3:'Tea Leaves',4:'Sugar'} # catalog in dictionary data structure.

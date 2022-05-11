@@ -26,11 +26,6 @@ def bevOrder(): # Beverage order function.
                 # creating a connection string between the python program and the SQL database.
     
     mycursor = mydb.cursor()
-    table_check = "IF OBJECT_ID('customers') IS NULL" # Check whether the table exists
-    check = mycursor.execute(table_check)
-
-    if table_check:
-        mycursor.execute("CREATE TABLE customers (id INT AUTO_INCREMENT PRIMARY KEY, product VARCHAR(255), weight INT, cost INT)")
     
     
     Beverage = {1:'Tea Masala',2:'Ginger',3:'Tea Leaves',4:'Sugar'} # catalog in dictionary data structure.
@@ -51,7 +46,7 @@ def bevOrder(): # Beverage order function.
             if choice == usrInpt:
                 prodNme = Beverage[usrInpt]
                 prodCost = 10
-                cust_order = Order(prodNme,wghtInpt,prodCost)
+                cust_order = Order(prodNme,wghtInpt,cost)
                 
                 sql = "INSERT INTO customers (product, weight, cost) VALUES (%s,%s,%s)"
                 val = (cust_order.prod,cust_order.weight,cust_order.cost)
@@ -75,7 +70,5 @@ def bevOrder(): # Beverage order function.
 bevOrder()
 
     
-    
 
-    
     
