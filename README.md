@@ -15,7 +15,7 @@ First, I’ll create a class that will capture the order-objects attributes. Whe
 
 
 
-I’ll start out by creating an order function then class which define the object's characteristics: 
+I’ll start out by creating an order class which define the object's attributes and method(behaviour): 
 
 ```python
 def Order():
@@ -25,19 +25,24 @@ def Order():
 			self.weight = weight
 			self.cost = self.weight * 10
 
+		def Cost(self):#This method will calculate cost by multiplying each product's weight by 10.
+            cost_per_gram = self.weight * 10 
+            return cost_per_gram
+
+
 					
 			
 ```
 
-Second, I have to determine how I’ll compute the order costs and totals in order to define the catalog rendering. I have a class that molds object with `prod, weight, cost` attributes. `Order` class has a `Total` method that accumulates each product’s total cost. Next, I have to determine how the user will be able to make a choice and relay the user selections. `# In this section I've opted for using a sql database because it will be simpler to integrate the data and have an aggregated platform.`
+Second, I have to determine how I’ll compute the order costs and totals in order to define the catalog rendering. I have a class that molds object with `prod, weight, cost` attributes. `Order` class has a `Total` method that accumulates each product’s total cost. I have to determine how the user will be able to make a choice and relay the user selections. In this section I've opted for using a sql database because it will be simpler to integrate the data and have an aggregated platform.
 
-Third, I’ll display the product catalog most probably in dictionary form, parse it then allow users to make selections without creating many lines of code using `if...else` conditional statements. User input variables will be used as reference objects in the dictionary iteration and conditional statements. 
+Third, I’ll display the product catalog most probably in dictionary form, displaying the available input options for customers.  
 
 ```python
 import pprint
 import mysql.connector
 
-def Selection():
+def bevOrder():
 
 	mydb = mysql.connector.connect(
 	host="localhost",
@@ -51,45 +56,50 @@ def Selection():
 	Beverage = {1:'Tea Masala',2:'Ginger',3:'Tea Leaves',4:'Sugar'} # catalog in dictionary data structure.
 	pprint.pprint(Beverage)
 
-	print('Select product to start shopping.')
-		
+	print('Select product to start shopping by inputting character 1-5.')
+    
+    # I'll need to create a loop that will keep on iterating as long as the conditions are met. 
+    prodSelect = 1 # Initializing the product select counter.
 
-		# I'll need to create a loop cycle that will keep on iterating as long as the conditions are met. 
+    while prodSelect > 0 and prodSelect < 5: # For the loop to continue, user must meet stated conditions.
 
-	while True:
-		usrInpt = int(input('Product:'))
-		wghtInpt = int(input('Weight:'))
-	
-		for bev in Beverage:
-            choice = bev
+        
+        usrInpt = int(input('Product:'))
 
-            if choice == usrInpt:
+        if usrInpt == 0:# This condition will save any previous order into the db and break.
+            mycursor.execute("SELECT * FROM customers")
+            myresult = mycursor.fetchall()
 
-		        prodNme = Beverage[usrInpt]
-                order = Order()
-                cost_mthd = order.Cost()
+            for x in myresult:
+                print(x)
+            break
 
-		        cust_order = Order(prodNme,wghtInpt,cost_mthd)
-								
-		        sql = "INSERT INTO customers (product, weight, cost) VALUES (%s, %s, %s)"
-		        val = (order.prod, order.weight, order.cost)
-		        mycursor.execute(sql, val)
-								
-		        mydb.commit()
-								
-		        print(mycursor.rowcount, "record inserted.")
+        elif usrInpt < 0 and usrInpt >= 5:
+            print('Input the correct character.')
+            continue
+             
+        
+        wghtInpt = int(input('Weight:'))
+        cost = wghtInpt * 10
+        
+        prodNme = Beverage[usrInpt] #prodNme initialiazed to the key:value chain. 
+        cust_order = Order(prodNme,wghtInpt,cost)
 
-		    elif:
-			
-		        mycursor.execute("SELECT * FROM customers")
-								
-		        myresult = mycursor.fetchall()
-								
-			    for x in myresult:
-				    print(x)
-				    break
+        sql = '''
+        INSERT INTO customers (product,weight,cost) VALUES(%s,%s,%s)
+        '''
+        val = (cust_order.prod,cust_order.weight,cust_order.cost)
+        
+        mycursor.execute(sql,val)
 
+        mydb.commit()
+
+        print(mycursor.rowcount,'record inserted.')
+
+
+        prodSelect = usrInpt
             
+bevOrder()
 
 
 ```

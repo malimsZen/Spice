@@ -31,7 +31,7 @@ def bevOrder(): # Beverage order function.
     
     Beverage = {1:'Tea Masala',2:'Ginger',3:'Tea Leaves',4:'Sugar'} # catalog in dictionary data structure.
     pprint.pprint(Beverage)
-    
+   
     print('Select product to start shopping by inputting character 1-5.')
     
     # I'll need to create a loop that will keep on iterating as long as the conditions are met. 
