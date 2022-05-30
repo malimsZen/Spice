@@ -39,6 +39,7 @@ def bevOrder(): # Beverage order function.
 
     while prodSelect > 0 and prodSelect < 5: # For the loop to continue, user must meet stated conditions.
 
+        
         usrInpt = int(input('Product:'))
 
         if usrInpt == 0:# This condition will save any previous order into the db and break.
