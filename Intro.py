@@ -23,12 +23,14 @@ def intro():
                 break
             elif message == '1':
                 print('We \'re glad to have you on board, please proceed to shopping.')
-                break      
+                     
             else:
                 print('Kinldy make sure your input is the correct character/digit')
+                continue
         
             
 intro()
+#The function is working as intended. 
              
    
 

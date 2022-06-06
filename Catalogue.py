@@ -21,14 +21,14 @@ def bevOrder(): # Beverage order function.
         host="localhost",
         user="root",
         password="P@$$w0rd",
-        database="Orderdb"
+        database="spiceDB"
         )
                 
                 # creating a connection string between the python program and the SQL database.
     
     mycursor = mydb.cursor()
     
-    
+  
     Beverage = {1:'Tea Masala',2:'Ginger',3:'Tea Leaves',4:'Sugar'} # catalog in dictionary data structure.
     pprint.pprint(Beverage)
    
@@ -43,14 +43,14 @@ def bevOrder(): # Beverage order function.
         usrInpt = int(input('Product:'))
 
         if usrInpt == 0:# This condition will save any previous order into the db and break.
-            mycursor.execute("SELECT * FROM customers")
+            mycursor.execute("SELECT * FROM prod_Order")
             myresult = mycursor.fetchall()
 
             for x in myresult:
                 print(x)
             break
 
-        elif usrInpt < 0 and usrInpt >= 5:
+        elif usrInpt < 0 or usrInpt >= 5:
             print('Input the correct character.')
             continue
              
@@ -62,7 +62,7 @@ def bevOrder(): # Beverage order function.
         cust_order = Order(prodNme,wghtInpt,cost)
 
         sql = '''
-        INSERT INTO customers (product,weight,cost) VALUES(%s,%s,%s)
+        INSERT INTO prod_Order (product,weight,cost) VALUES(%s,%s,%s)
         '''
         val = (cust_order.prod,cust_order.weight,cust_order.cost)
         
@@ -81,5 +81,9 @@ def bevOrder(): # Beverage order function.
 bevOrder()
 
     
-
+# I've been thinking of how to go about the menu selection and a simpler idea has popped 
+# up in my mind. I could easily create a menu table in the Spice database then used Pandas
+#  to iterate through it when making selections. 
     
+#Instead of appending the food spice menu and creating a long function, I'll create a separate
+#functionm,this time revised with Pandas.
