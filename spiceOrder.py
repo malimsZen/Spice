@@ -60,8 +60,6 @@ def cust_Reg():
             self.name = name
             self.address = address
             self.contact = contact
-
-
         
 
     # Collecting customer information.

@@ -1,7 +1,9 @@
-import Intro
+import sys
+import Pandas as pd
 
-Intro.intro() # invoking intro function from the intro module.
-
+fruits = ['apples','peach','strawberry','orange']
+fruits = pd.DataFrame(fruits)
+print(fruits)
 
 
 
